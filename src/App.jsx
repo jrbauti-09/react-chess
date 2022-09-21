@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import './App.css'
-import { gameSubject, initGame, resetGame } from './Game'
-import Board from './Board'
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import { gameSubject, initGame, resetGame } from "./Game";
+import Board from "./Board";
 
 function App() {
-  const [board, setBoard] = useState([])
-  const [isGameOver, setIsGameOver] = useState()
-  const [result, setResult] = useState()
-  const [turn, setTurn] = useState()
+  const [board, setBoard] = useState([]);
+  const [isGameOver, setIsGameOver] = useState();
+  const [result, setResult] = useState();
+  const [turn, setTurn] = useState();
   useEffect(() => {
-    initGame()
+    initGame();
     const subscribe = gameSubject.subscribe((game) => {
-      setBoard(game.board)
-      setIsGameOver(game.isGameOver)
-      setResult(game.result)
-      setTurn(game.turn)
-    })
-    return () => subscribe.unsubscribe()
-  }, [])
+      setBoard(game.board);
+      setIsGameOver(game.isGameOver);
+      setResult(game.result);
+      setTurn(game.turn);
+    });
+    return () => subscribe.unsubscribe();
+  }, []);
   return (
     <div className="container">
       {isGameOver && (
         <h2 className="vertical-text">
-          GAME OVER
+          GAME OVER!
           <button onClick={resetGame}>
             <span className="vertical-text"> NEW GAME</span>
           </button>
@@ -33,7 +33,7 @@ function App() {
       </div>
       {result && <p className="vertical-text">{result}</p>}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
